@@ -1,0 +1,23 @@
+on: [push, pull_request]
+name: Continuous Integration
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
+          cache-dependency-path: |
+            go.sum
+            examples/go.sum
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Lint code
+        uses: golangci/golangci-lint-action@v6
+      - name: Lint examples
+        uses: golangci/golangci-lint-action@v6
+        with:
+          working-directory: examples
+      - name: Test code
+        run: go test -race -v -coverprofile=coverage.txt -covermode=atomic

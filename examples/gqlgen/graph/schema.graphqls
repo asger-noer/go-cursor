@@ -1,0 +1,39 @@
+type PageInfo {
+    endCursor: String
+    startCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+}
+
+input TodoInput {
+    first: Int
+    after: String
+    last: Int
+    before: String
+}
+
+type Query {
+    todos(input: TodoInput): TodoConnection
+}
+
+type TodoConnection {
+    Edges: [TodoEdge]
+    PageInfo: PageInfo
+}
+
+type TodoEdge {
+    cursor: String!
+    node: Todo!
+}
+
+type Todo {
+    id: ID!
+    text: String!
+    done: Boolean!
+    user: User!
+}
+
+type User {
+    id: ID!
+    name: String!
+}
