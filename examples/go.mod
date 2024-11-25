@@ -3,7 +3,7 @@ module examples
 go 1.23.2
 
 require (
-	github.com/99designs/gqlgen v0.17.56
+	github.com/99designs/gqlgen v0.17.57
 	github.com/asger-noer/cursor v1.0.0
 	github.com/vektah/gqlparser/v2 v2.5.19
 )
