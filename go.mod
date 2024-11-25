@@ -1,4 +1,4 @@
-module github.com/asger-noer/cursor
+module github.com/asger-noer/go-cursor
 
 go 1.23.2
 

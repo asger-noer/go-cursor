@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/alecthomas/assert/v2"
-	"github.com/asger-noer/cursor"
+	"github.com/asger-noer/go-cursor"
 )
 
 type UserNodeResolver struct {
@@ -231,7 +231,7 @@ func TestNewConnectionFromEdges(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			conn, err := cursor.NewConnection(tt.data, cursorFn, tt.args...)
+			conn, err := cursor.New(tt.data, cursorFn, tt.args...)
 
 			if tt.want.err == nil {
 				assert.NoError(t, err)

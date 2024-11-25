@@ -10,7 +10,7 @@ import (
 
 	"examples/gqlgen/graph/model"
 
-	"github.com/asger-noer/cursor"
+	"github.com/asger-noer/go-cursor"
 )
 
 // Todos is the resolver for the todos field.
@@ -26,21 +26,21 @@ func (r *queryResolver) Todos(ctx context.Context, input *model.TodoInput) (*mod
 		cursor.After(input.After),
 	}
 
-	// Create a connection from the edges.
-	connection, err := cursor.NewConnection(r.Data, cursorFn, args...)
+	// Create a cursor from the edges.
+	cur, err := cursor.New(r.Data, cursorFn, args...)
 	if err != nil {
 		return nil, err
 	}
 
 	var edges []*model.TodoEdge
-	for _, edge := range connection.Edges() {
+	for _, edge := range cur.Edges() {
 		edges = append(edges, &model.TodoEdge{
 			Node:   edge.Node(),
 			Cursor: edge.Cursor(),
 		})
 	}
 
-	pageinfo := connection.PageInfo()
+	pageinfo := cur.PageInfo()
 	return &model.TodoConnection{
 		Edges: edges,
 		PageInfo: &model.PageInfo{

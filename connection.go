@@ -16,8 +16,8 @@ type Connection[T any] struct {
 	pageInfo pageInfo
 }
 
-// NewConnection creates a new Pages object. The pages object is used to paginate
-func NewConnection[T any](nodes []T, cursor func(T) string, args ...Argument) (Connection[T], error) {
+// New creates a new Pages object. The pages object is used to paginate
+func New[T any](nodes []T, cursor func(T) string, args ...Argument) (Connection[T], error) {
 	var err error
 	var arguments arguments
 

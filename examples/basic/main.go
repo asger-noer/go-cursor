@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/asger-noer/cursor"
+	"github.com/asger-noer/go-cursor"
 )
 
 type Users struct {
@@ -35,20 +35,20 @@ func main() {
 		cursor.After(&after),
 	}
 
-	// Create a new connection with the list of users
-	connection, err := cursor.NewConnection(users, userCursor, args...)
+	// Create a new cur with the list of users
+	cur, err := cursor.New(users, userCursor, args...)
 	if err != nil {
 		// Handle error
 	}
 
-	for _, user := range connection.Edges() {
+	for _, user := range cur.Edges() {
 		fmt.Println("cursor:", user.Cursor(), "\tnode:\t", user.Node())
 		// prints:
 		// cursor: 3 	node:	 {3 Charlie}
 		// cursor: 4 	node:	 {4 David}
 	}
 
-	pageinfo := connection.PageInfo()
+	pageinfo := cur.PageInfo()
 	fmt.Println(
 		"startCursor:", *pageinfo.StartCursor(),
 		"endCursor:", *pageinfo.EndCursor(),

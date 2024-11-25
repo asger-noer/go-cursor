@@ -14,8 +14,8 @@ github.com/andybalholm/cascadia v1.3.2 h1:3Xi6Dw5lHF15JtdcmAHD3i1+T8plmv7BQ/nsVi
 github.com/andybalholm/cascadia v1.3.2/go.mod h1:7gtRlve5FxPPgIgX36uWBX58OdBsSS6lUvCFb+h7KvU=
 github.com/arbovm/levenshtein v0.0.0-20160628152529-48b4e1c0c4d0 h1:jfIu9sQUG6Ig+0+Ap1h4unLjW6YQJpKZVmUzxsD4E/Q=
 github.com/arbovm/levenshtein v0.0.0-20160628152529-48b4e1c0c4d0/go.mod h1:t2tdKJDJF9BV14lnkjHmOQgcvEKgtqs5a1N3LNdJhGE=
-github.com/asger-noer/cursor v1.0.0 h1:wlCbbVY3NxWYLGrGKcyQeUPLAbXntk8j7d6ZZhvD9jI=
-github.com/asger-noer/cursor v1.0.0/go.mod h1:w7bHMbBhSljgwrWUFkIUhXWJu5kU6bJYMNjP4Gt2v+c=
+github.com/asger-noer/go-cursor v1.0.0 h1:wlCbbVY3NxWYLGrGKcyQeUPLAbXntk8j7d6ZZhvD9jI=
+github.com/asger-noer/go-cursor v1.0.0/go.mod h1:w7bHMbBhSljgwrWUFkIUhXWJu5kU6bJYMNjP4Gt2v+c=
 github.com/cpuguy83/go-md2man/v2 v2.0.5 h1:ZtcqGrnekaHpVLArFSe4HK5DoKx1T0rq2DwVB0alcyc=
 github.com/cpuguy83/go-md2man/v2 v2.0.5/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
