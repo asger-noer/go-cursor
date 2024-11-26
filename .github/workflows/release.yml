@@ -1,11 +1,12 @@
 on:
   release:
-    tags:
-      - "v*.*.*"
+    tags: ["v*.*.*"]
+    types: [released]
 name: Release
 jobs:
   go-reference:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - name: Update Go Reference
+        run: |
           curl https://sum.golang.org/lookup/github.com/asger-noer/go-cursor@${{ github.ref_name }}
