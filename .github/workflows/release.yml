@@ -1,0 +1,11 @@
+on:
+  release:
+    tags:
+      - "v*.*.*"
+name: Release
+jobs:
+  go-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl https://sum.golang.org/lookup/github.com/asger-noer/go-cursor@${{ github.ref_name }}
