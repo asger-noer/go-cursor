@@ -13,11 +13,11 @@ input TodoInput {
 }
 
 type Query {
-    todos(input: TodoInput): TodoConnection
+    todos(input: TodoInput): TodoConnection!
 }
 
 type TodoConnection {
-    Edges: [TodoEdge]
+    Edges: [TodoEdge!]!
     PageInfo: PageInfo
 }
 

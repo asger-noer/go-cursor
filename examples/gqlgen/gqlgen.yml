@@ -95,3 +95,12 @@ models:
       - github.com/99designs/gqlgen/graphql.Int
       - github.com/99designs/gqlgen/graphql.Int64
       - github.com/99designs/gqlgen/graphql.Int32
+  PageInfo:
+    model:
+      - examples/gqlgen/graph/types.PageInfo
+  TodoConnection:
+    model:
+      - examples/gqlgen/graph/types.TodoConnection
+  TodoEdge:
+    model:
+      - examples/gqlgen/graph/types.TodoEdge

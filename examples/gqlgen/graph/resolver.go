@@ -7,5 +7,5 @@ import "examples/gqlgen/graph/model"
 // It serves as dependency injection for your app, add any dependencies you require here.
 
 type Resolver struct {
-	Data []*model.Todo
+	Data []model.Todo
 }

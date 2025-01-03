@@ -15,6 +15,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
+	"github.com/asger-noer/go-cursor"
 	gqlparser "github.com/vektah/gqlparser/v2"
 	"github.com/vektah/gqlparser/v2/ast"
 )
@@ -81,7 +82,7 @@ type ComplexityRoot struct {
 }
 
 type QueryResolver interface {
-	Todos(ctx context.Context, input *model.TodoInput) (*model.TodoConnection, error)
+	Todos(ctx context.Context, input *model.TodoInput) (*cursor.Connection[model.Todo], error)
 }
 
 type executableSchema struct {
@@ -423,7 +424,7 @@ func (ec *executionContext) field___Type_fields_argsIncludeDeprecated(
 
 // region    **************************** field.gotpl *****************************
 
-func (ec *executionContext) _PageInfo_endCursor(ctx context.Context, field graphql.CollectedField, obj *model.PageInfo) (ret graphql.Marshaler) {
+func (ec *executionContext) _PageInfo_endCursor(ctx context.Context, field graphql.CollectedField, obj *cursor.PageInfo) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_PageInfo_endCursor(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -437,7 +438,7 @@ func (ec *executionContext) _PageInfo_endCursor(ctx context.Context, field graph
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.EndCursor, nil
+		return obj.EndCursor(), nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -455,7 +456,7 @@ func (ec *executionContext) fieldContext_PageInfo_endCursor(_ context.Context, f
 	fc = &graphql.FieldContext{
 		Object:     "PageInfo",
 		Field:      field,
-		IsMethod:   false,
+		IsMethod:   true,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type String does not have child fields")
@@ -464,7 +465,7 @@ func (ec *executionContext) fieldContext_PageInfo_endCursor(_ context.Context, f
 	return fc, nil
 }
 
-func (ec *executionContext) _PageInfo_startCursor(ctx context.Context, field graphql.CollectedField, obj *model.PageInfo) (ret graphql.Marshaler) {
+func (ec *executionContext) _PageInfo_startCursor(ctx context.Context, field graphql.CollectedField, obj *cursor.PageInfo) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_PageInfo_startCursor(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -478,7 +479,7 @@ func (ec *executionContext) _PageInfo_startCursor(ctx context.Context, field gra
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.StartCursor, nil
+		return obj.StartCursor(), nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -496,7 +497,7 @@ func (ec *executionContext) fieldContext_PageInfo_startCursor(_ context.Context,
 	fc = &graphql.FieldContext{
 		Object:     "PageInfo",
 		Field:      field,
-		IsMethod:   false,
+		IsMethod:   true,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type String does not have child fields")
@@ -505,7 +506,7 @@ func (ec *executionContext) fieldContext_PageInfo_startCursor(_ context.Context,
 	return fc, nil
 }
 
-func (ec *executionContext) _PageInfo_hasNextPage(ctx context.Context, field graphql.CollectedField, obj *model.PageInfo) (ret graphql.Marshaler) {
+func (ec *executionContext) _PageInfo_hasNextPage(ctx context.Context, field graphql.CollectedField, obj *cursor.PageInfo) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_PageInfo_hasNextPage(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -519,7 +520,7 @@ func (ec *executionContext) _PageInfo_hasNextPage(ctx context.Context, field gra
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.HasNextPage, nil
+		return obj.HasNextPage(), nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -540,7 +541,7 @@ func (ec *executionContext) fieldContext_PageInfo_hasNextPage(_ context.Context,
 	fc = &graphql.FieldContext{
 		Object:     "PageInfo",
 		Field:      field,
-		IsMethod:   false,
+		IsMethod:   true,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type Boolean does not have child fields")
@@ -549,7 +550,7 @@ func (ec *executionContext) fieldContext_PageInfo_hasNextPage(_ context.Context,
 	return fc, nil
 }
 
-func (ec *executionContext) _PageInfo_hasPreviousPage(ctx context.Context, field graphql.CollectedField, obj *model.PageInfo) (ret graphql.Marshaler) {
+func (ec *executionContext) _PageInfo_hasPreviousPage(ctx context.Context, field graphql.CollectedField, obj *cursor.PageInfo) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_PageInfo_hasPreviousPage(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -563,7 +564,7 @@ func (ec *executionContext) _PageInfo_hasPreviousPage(ctx context.Context, field
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.HasPreviousPage, nil
+		return obj.HasPreviousPage(), nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -584,7 +585,7 @@ func (ec *executionContext) fieldContext_PageInfo_hasPreviousPage(_ context.Cont
 	fc = &graphql.FieldContext{
 		Object:     "PageInfo",
 		Field:      field,
-		IsMethod:   false,
+		IsMethod:   true,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type Boolean does not have child fields")
@@ -614,11 +615,14 @@ func (ec *executionContext) _Query_todos(ctx context.Context, field graphql.Coll
 		return graphql.Null
 	}
 	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
 		return graphql.Null
 	}
-	res := resTmp.(*model.TodoConnection)
+	res := resTmp.(*cursor.Connection[model.Todo])
 	fc.Result = res
-	return ec.marshalOTodoConnection2ᚖexamplesᚋgqlgenᚋgraphᚋmodelᚐTodoConnection(ctx, field.Selections, res)
+	return ec.marshalNTodoConnection2ᚖgithubᚗcomᚋasgerᚑnoerᚋgoᚑcursorᚐConnection(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Query_todos(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -962,7 +966,7 @@ func (ec *executionContext) fieldContext_Todo_user(_ context.Context, field grap
 	return fc, nil
 }
 
-func (ec *executionContext) _TodoConnection_Edges(ctx context.Context, field graphql.CollectedField, obj *model.TodoConnection) (ret graphql.Marshaler) {
+func (ec *executionContext) _TodoConnection_Edges(ctx context.Context, field graphql.CollectedField, obj *cursor.Connection[model.Todo]) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_TodoConnection_Edges(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -976,25 +980,28 @@ func (ec *executionContext) _TodoConnection_Edges(ctx context.Context, field gra
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Edges, nil
+		return obj.Edges(), nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
 		return graphql.Null
 	}
 	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
 		return graphql.Null
 	}
-	res := resTmp.([]*model.TodoEdge)
+	res := resTmp.([]cursor.Edge[model.Todo])
 	fc.Result = res
-	return ec.marshalOTodoEdge2ᚕᚖexamplesᚋgqlgenᚋgraphᚋmodelᚐTodoEdge(ctx, field.Selections, res)
+	return ec.marshalNTodoEdge2ᚕgithubᚗcomᚋasgerᚑnoerᚋgoᚑcursorᚐEdgeᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_TodoConnection_Edges(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "TodoConnection",
 		Field:      field,
-		IsMethod:   false,
+		IsMethod:   true,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
@@ -1009,7 +1016,7 @@ func (ec *executionContext) fieldContext_TodoConnection_Edges(_ context.Context,
 	return fc, nil
 }
 
-func (ec *executionContext) _TodoConnection_PageInfo(ctx context.Context, field graphql.CollectedField, obj *model.TodoConnection) (ret graphql.Marshaler) {
+func (ec *executionContext) _TodoConnection_PageInfo(ctx context.Context, field graphql.CollectedField, obj *cursor.Connection[model.Todo]) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_TodoConnection_PageInfo(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -1023,7 +1030,7 @@ func (ec *executionContext) _TodoConnection_PageInfo(ctx context.Context, field 
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.PageInfo, nil
+		return obj.PageInfo(), nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -1032,16 +1039,16 @@ func (ec *executionContext) _TodoConnection_PageInfo(ctx context.Context, field 
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*model.PageInfo)
+	res := resTmp.(cursor.PageInfo)
 	fc.Result = res
-	return ec.marshalOPageInfo2ᚖexamplesᚋgqlgenᚋgraphᚋmodelᚐPageInfo(ctx, field.Selections, res)
+	return ec.marshalOPageInfo2githubᚗcomᚋasgerᚑnoerᚋgoᚑcursorᚐPageInfo(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_TodoConnection_PageInfo(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "TodoConnection",
 		Field:      field,
-		IsMethod:   false,
+		IsMethod:   true,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
@@ -1060,7 +1067,7 @@ func (ec *executionContext) fieldContext_TodoConnection_PageInfo(_ context.Conte
 	return fc, nil
 }
 
-func (ec *executionContext) _TodoEdge_cursor(ctx context.Context, field graphql.CollectedField, obj *model.TodoEdge) (ret graphql.Marshaler) {
+func (ec *executionContext) _TodoEdge_cursor(ctx context.Context, field graphql.CollectedField, obj *cursor.Edge[model.Todo]) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_TodoEdge_cursor(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -1074,7 +1081,7 @@ func (ec *executionContext) _TodoEdge_cursor(ctx context.Context, field graphql.
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Cursor, nil
+		return obj.Cursor(), nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -1095,7 +1102,7 @@ func (ec *executionContext) fieldContext_TodoEdge_cursor(_ context.Context, fiel
 	fc = &graphql.FieldContext{
 		Object:     "TodoEdge",
 		Field:      field,
-		IsMethod:   false,
+		IsMethod:   true,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type String does not have child fields")
@@ -1104,7 +1111,7 @@ func (ec *executionContext) fieldContext_TodoEdge_cursor(_ context.Context, fiel
 	return fc, nil
 }
 
-func (ec *executionContext) _TodoEdge_node(ctx context.Context, field graphql.CollectedField, obj *model.TodoEdge) (ret graphql.Marshaler) {
+func (ec *executionContext) _TodoEdge_node(ctx context.Context, field graphql.CollectedField, obj *cursor.Edge[model.Todo]) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_TodoEdge_node(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -1118,7 +1125,7 @@ func (ec *executionContext) _TodoEdge_node(ctx context.Context, field graphql.Co
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Node, nil
+		return obj.Node(), nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -1130,16 +1137,16 @@ func (ec *executionContext) _TodoEdge_node(ctx context.Context, field graphql.Co
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*model.Todo)
+	res := resTmp.(model.Todo)
 	fc.Result = res
-	return ec.marshalNTodo2ᚖexamplesᚋgqlgenᚋgraphᚋmodelᚐTodo(ctx, field.Selections, res)
+	return ec.marshalNTodo2examplesᚋgqlgenᚋgraphᚋmodelᚐTodo(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_TodoEdge_node(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "TodoEdge",
 		Field:      field,
-		IsMethod:   false,
+		IsMethod:   true,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
@@ -3077,7 +3084,7 @@ func (ec *executionContext) unmarshalInputTodoInput(ctx context.Context, obj int
 
 var pageInfoImplementors = []string{"PageInfo"}
 
-func (ec *executionContext) _PageInfo(ctx context.Context, sel ast.SelectionSet, obj *model.PageInfo) graphql.Marshaler {
+func (ec *executionContext) _PageInfo(ctx context.Context, sel ast.SelectionSet, obj *cursor.PageInfo) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, pageInfoImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -3145,13 +3152,16 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 		case "todos":
 			field := field
 
-			innerFunc := func(ctx context.Context, _ *graphql.FieldSet) (res graphql.Marshaler) {
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
 				defer func() {
 					if r := recover(); r != nil {
 						ec.Error(ctx, ec.Recover(ctx, r))
 					}
 				}()
 				res = ec._Query_todos(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
 				return res
 			}
 
@@ -3248,7 +3258,7 @@ func (ec *executionContext) _Todo(ctx context.Context, sel ast.SelectionSet, obj
 
 var todoConnectionImplementors = []string{"TodoConnection"}
 
-func (ec *executionContext) _TodoConnection(ctx context.Context, sel ast.SelectionSet, obj *model.TodoConnection) graphql.Marshaler {
+func (ec *executionContext) _TodoConnection(ctx context.Context, sel ast.SelectionSet, obj *cursor.Connection[model.Todo]) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, todoConnectionImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -3259,6 +3269,9 @@ func (ec *executionContext) _TodoConnection(ctx context.Context, sel ast.Selecti
 			out.Values[i] = graphql.MarshalString("TodoConnection")
 		case "Edges":
 			out.Values[i] = ec._TodoConnection_Edges(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
 		case "PageInfo":
 			out.Values[i] = ec._TodoConnection_PageInfo(ctx, field, obj)
 		default:
@@ -3286,7 +3299,7 @@ func (ec *executionContext) _TodoConnection(ctx context.Context, sel ast.Selecti
 
 var todoEdgeImplementors = []string{"TodoEdge"}
 
-func (ec *executionContext) _TodoEdge(ctx context.Context, sel ast.SelectionSet, obj *model.TodoEdge) graphql.Marshaler {
+func (ec *executionContext) _TodoEdge(ctx context.Context, sel ast.SelectionSet, obj *cursor.Edge[model.Todo]) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, todoEdgeImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -3743,14 +3756,70 @@ func (ec *executionContext) marshalNString2string(ctx context.Context, sel ast.S
 	return res
 }
 
-func (ec *executionContext) marshalNTodo2ᚖexamplesᚋgqlgenᚋgraphᚋmodelᚐTodo(ctx context.Context, sel ast.SelectionSet, v *model.Todo) graphql.Marshaler {
+func (ec *executionContext) marshalNTodo2examplesᚋgqlgenᚋgraphᚋmodelᚐTodo(ctx context.Context, sel ast.SelectionSet, v model.Todo) graphql.Marshaler {
+	return ec._Todo(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNTodoConnection2githubᚗcomᚋasgerᚑnoerᚋgoᚑcursorᚐConnection(ctx context.Context, sel ast.SelectionSet, v cursor.Connection[model.Todo]) graphql.Marshaler {
+	return ec._TodoConnection(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNTodoConnection2ᚖgithubᚗcomᚋasgerᚑnoerᚋgoᚑcursorᚐConnection(ctx context.Context, sel ast.SelectionSet, v *cursor.Connection[model.Todo]) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
 		}
 		return graphql.Null
 	}
-	return ec._Todo(ctx, sel, v)
+	return ec._TodoConnection(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNTodoEdge2githubᚗcomᚋasgerᚑnoerᚋgoᚑcursorᚐEdge(ctx context.Context, sel ast.SelectionSet, v cursor.Edge[model.Todo]) graphql.Marshaler {
+	return ec._TodoEdge(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNTodoEdge2ᚕgithubᚗcomᚋasgerᚑnoerᚋgoᚑcursorᚐEdgeᚄ(ctx context.Context, sel ast.SelectionSet, v []cursor.Edge[model.Todo]) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNTodoEdge2githubᚗcomᚋasgerᚑnoerᚋgoᚑcursorᚐEdge(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
 }
 
 func (ec *executionContext) marshalNUser2ᚖexamplesᚋgqlgenᚋgraphᚋmodelᚐUser(ctx context.Context, sel ast.SelectionSet, v *model.User) graphql.Marshaler {
@@ -4058,11 +4127,8 @@ func (ec *executionContext) marshalOInt2ᚖint(ctx context.Context, sel ast.Sele
 	return res
 }
 
-func (ec *executionContext) marshalOPageInfo2ᚖexamplesᚋgqlgenᚋgraphᚋmodelᚐPageInfo(ctx context.Context, sel ast.SelectionSet, v *model.PageInfo) graphql.Marshaler {
-	if v == nil {
-		return graphql.Null
-	}
-	return ec._PageInfo(ctx, sel, v)
+func (ec *executionContext) marshalOPageInfo2githubᚗcomᚋasgerᚑnoerᚋgoᚑcursorᚐPageInfo(ctx context.Context, sel ast.SelectionSet, v cursor.PageInfo) graphql.Marshaler {
+	return ec._PageInfo(ctx, sel, &v)
 }
 
 func (ec *executionContext) unmarshalOString2ᚖstring(ctx context.Context, v interface{}) (*string, error) {
@@ -4079,61 +4145,6 @@ func (ec *executionContext) marshalOString2ᚖstring(ctx context.Context, sel as
 	}
 	res := graphql.MarshalString(*v)
 	return res
-}
-
-func (ec *executionContext) marshalOTodoConnection2ᚖexamplesᚋgqlgenᚋgraphᚋmodelᚐTodoConnection(ctx context.Context, sel ast.SelectionSet, v *model.TodoConnection) graphql.Marshaler {
-	if v == nil {
-		return graphql.Null
-	}
-	return ec._TodoConnection(ctx, sel, v)
-}
-
-func (ec *executionContext) marshalOTodoEdge2ᚕᚖexamplesᚋgqlgenᚋgraphᚋmodelᚐTodoEdge(ctx context.Context, sel ast.SelectionSet, v []*model.TodoEdge) graphql.Marshaler {
-	if v == nil {
-		return graphql.Null
-	}
-	ret := make(graphql.Array, len(v))
-	var wg sync.WaitGroup
-	isLen1 := len(v) == 1
-	if !isLen1 {
-		wg.Add(len(v))
-	}
-	for i := range v {
-		i := i
-		fc := &graphql.FieldContext{
-			Index:  &i,
-			Result: &v[i],
-		}
-		ctx := graphql.WithFieldContext(ctx, fc)
-		f := func(i int) {
-			defer func() {
-				if r := recover(); r != nil {
-					ec.Error(ctx, ec.Recover(ctx, r))
-					ret = nil
-				}
-			}()
-			if !isLen1 {
-				defer wg.Done()
-			}
-			ret[i] = ec.marshalOTodoEdge2ᚖexamplesᚋgqlgenᚋgraphᚋmodelᚐTodoEdge(ctx, sel, v[i])
-		}
-		if isLen1 {
-			f(i)
-		} else {
-			go f(i)
-		}
-
-	}
-	wg.Wait()
-
-	return ret
-}
-
-func (ec *executionContext) marshalOTodoEdge2ᚖexamplesᚋgqlgenᚋgraphᚋmodelᚐTodoEdge(ctx context.Context, sel ast.SelectionSet, v *model.TodoEdge) graphql.Marshaler {
-	if v == nil {
-		return graphql.Null
-	}
-	return ec._TodoEdge(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalOTodoInput2ᚖexamplesᚋgqlgenᚋgraphᚋmodelᚐTodoInput(ctx context.Context, v interface{}) (*model.TodoInput, error) {

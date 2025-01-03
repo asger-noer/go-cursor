@@ -13,7 +13,7 @@ var (
 // Connection is a generic connection type that is used to paginate results.
 type Connection[T any] struct {
 	edges    Edges[T]
-	pageInfo pageInfo
+	pageInfo PageInfo
 }
 
 // New creates a new Pages object. The pages object is used to paginate
@@ -46,7 +46,7 @@ func New[T any](nodes []T, cursor func(T) string, args ...Argument) (Connection[
 
 	return Connection[T]{
 		edges: trimmed,
-		pageInfo: pageInfo{
+		pageInfo: PageInfo{
 			startCursor:     trimmed.startCursor(),
 			endCursor:       trimmed.endCursor(),
 			hasPreviousPage: trimmed.hasPreviousPage(edges, arguments),
@@ -56,16 +56,16 @@ func New[T any](nodes []T, cursor func(T) string, args ...Argument) (Connection[
 }
 
 // PageInfo returns the page info for the connection.
-func (p *Connection[T]) PageInfo() pageInfo {
+func (p *Connection[T]) PageInfo() PageInfo {
 	return p.pageInfo
 }
 
 // Edges returns the edges for the connection.
-func (p *Connection[T]) Edges() Edges[T] {
+func (p *Connection[T]) Edges() []Edge[T] {
 	return p.edges
 }
 
-type pageInfo struct {
+type PageInfo struct {
 	startCursor     *string
 	endCursor       *string
 	hasPreviousPage bool
@@ -73,22 +73,22 @@ type pageInfo struct {
 }
 
 // StartCursor returns the start cursor for the connection.
-func (p *pageInfo) StartCursor() *string {
+func (p *PageInfo) StartCursor() *string {
 	return p.startCursor
 }
 
 // EndCursor returns the end cursor for the connection.
-func (p *pageInfo) EndCursor() *string {
+func (p *PageInfo) EndCursor() *string {
 	return p.endCursor
 }
 
 // HasPreviousPage returns true if there is a previous page.
-func (p *pageInfo) HasPreviousPage() bool {
+func (p *PageInfo) HasPreviousPage() bool {
 	return p.hasPreviousPage
 }
 
 // HasNextPage returns true if there is a next page.
-func (p *pageInfo) HasNextPage() bool {
+func (p *PageInfo) HasNextPage() bool {
 	return p.hasNextPage
 }
 

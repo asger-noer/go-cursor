@@ -12,6 +12,8 @@ import (
 	"github.com/99designs/gqlgen/graphql/playground"
 )
 
+//go:generate go run github.com/99designs/gqlgen generate
+
 const defaultPort = "8080"
 
 func main() {
@@ -21,7 +23,7 @@ func main() {
 	}
 
 	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{
-		Data: []*model.Todo{
+		Data: []model.Todo{
 			{ID: "1", Text: "Do the laundry", Done: false},
 			{ID: "2", Text: "Do the dishes", Done: true},
 			{ID: "3", Text: "Do the cleaning", Done: false},
