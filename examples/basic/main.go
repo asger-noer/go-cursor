@@ -15,7 +15,7 @@ func userCursor(user Users) string {
 	return user.ID
 }
 
-var users []Users = []Users{
+var users = []Users{
 	{ID: "1", UserName: "Alice"},
 	{ID: "2", UserName: "Bob"},
 	{ID: "3", UserName: "Charlie"},
@@ -38,7 +38,7 @@ func main() {
 	// Create a new cur with the list of users
 	cur, err := cursor.New(users, userCursor, args...)
 	if err != nil {
-		// Handle error
+		panic(err) // handle error
 	}
 
 	for _, user := range cur.Edges() {
