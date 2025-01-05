@@ -102,7 +102,7 @@ func (e Edges[T]) applyCursor(after, before *string) Edges[T] {
 
 	switch {
 	case after != nil:
-		var afterEdge int = -1
+		afterEdge := -1
 		for i, edge := range e {
 			if edge.Cursor() == *after {
 				afterEdge = i
@@ -116,7 +116,7 @@ func (e Edges[T]) applyCursor(after, before *string) Edges[T] {
 
 		edges = e[afterEdge+1:]
 	case before != nil:
-		var beforeEdge int = -1
+		beforeEdge := -1
 		for i, edge := range e {
 			if edge.Cursor() == *before {
 				beforeEdge = i

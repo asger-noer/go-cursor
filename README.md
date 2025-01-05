@@ -37,3 +37,39 @@ edges := cur.Edges() {
 <!-- External links -->
 
 [relay_graphql_connection]: https://relay.dev/graphql/connections.htm
+
+### GQLGen
+
+> [!TIP]
+> You can find a complete example of how to use Cursor with gqlgen in the [examples/gqlgen](examples/gqlgen) directory.
+
+If you are using [gqlgen](https://gqlgen.com/), you can use the `Cursor` type to generate the cursor for each item. You'll need to define the concrete implementation of the `Connection` and `Edge` types with the model being paginated. This is done by adding creating a type and binding it in the model section of the `gqlgen.yml` file:
+
+_types.go:_
+```go
+package types
+
+import (
+	"github.com/asger-noer/go-cursor"
+	"github.com/asger-noer/go-cursor/examples/gqlgen/graph/model"
+)
+
+type (
+	TodoConnection = cursor.Connection[model.Todo]
+	TodoEdge       = cursor.Edge[model.Todo]
+)
+```
+
+_gqlgen.yml:_
+```yaml
+models:
+  PageInfo:
+    model:
+      - github.com/asger-noer/go-cursor.PageInfo
+  TodoConnection:
+    model:
+      - examples/gqlgen/graph/types.TodoConnection
+  TodoEdge:
+    model:
+      - examples/gqlgen/graph/types.TodoEdge
+```

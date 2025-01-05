@@ -1,0 +1,41 @@
+run:
+  timeout: 2m
+  allow-parallel-runners: true
+
+linters:
+  disable-all: true
+  enable:
+    # Defaults
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - errcheck
+
+    # Extras
+    - gofumpt
+    - gci
+    - gocritic
+    - gocyclo
+    - gosec
+    - revive
+
+linters-settings:
+  staticcheck:
+    checks: ["all"]
+  gci:
+    custom-order: true
+    sections:
+      - standard
+      - default
+      - prefix(github.com/camply-club) # Our own packages
+      - blank # import _ "package"
+      - dot # Import . "package"
+issues:
+  fix: true
+  exclude-rules:
+    - path: "(.+)_test.go"
+      linters:
+        - gosec
+        - gocyclo
