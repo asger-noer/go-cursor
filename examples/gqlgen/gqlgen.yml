@@ -97,7 +97,7 @@ models:
       - github.com/99designs/gqlgen/graphql.Int32
   PageInfo:
     model:
-      - examples/gqlgen/graph/types.PageInfo
+      - github.com/asger-noer/go-cursor.PageInfo
   TodoConnection:
     model:
       - examples/gqlgen/graph/types.TodoConnection
