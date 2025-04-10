@@ -14,9 +14,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Lint code
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v7
       - name: Lint examples
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v7
         with:
           working-directory: examples
       - name: Test code
